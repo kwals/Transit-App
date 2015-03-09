@@ -1,6 +1,6 @@
 class BikeShareController < ApplicationController
 
-  def index (lat, long)
+  def index
     render json: BikeShare.bikes_nearby(lat: params[:lat], long: params[:long])
   end
 
