@@ -6,6 +6,7 @@ class Uber < ActiveRecord::Base
   format :json
   
   UBER_SERVER_KEY = Figaro.env.UBER_SERVER_KEY
+  # FIXME hardcoded coordinates
   COORDINATES = "latitude=38.85795&longitude=-77.04895" # Crystal Dr coordinates
 
   def self.fetch_uber_status
