@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get "/bikeshare", 'bikeshare#index'
-
   root "staticpages#home"
 
-  get '/'       => 'staticpages#home',   as: 'home'
-  get '/ubers'   => 'ubers#index',         as: 'ubers'
+  get '/'             =>  'staticpages#home',     as: 'home'
+  get '/bikeshares'   =>  'bikeshares#index',     as: 'bikeshares'
+  get '/buses'        =>  'buses#index',          as: 'buses'
+  get '/trains'       =>  'rails#index',          as: 'trains'
+  get '/ubers'        =>  'ubers#index',          as: 'ubers'
+  get '/zipcars'      =>  'zipcars#index',        as: 'zipcars'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
