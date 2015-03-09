@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get "/bikeshare", 'bikeshare#index'
+
   root "staticpages#home"
 
   get '/'       => 'staticpages#home',   as: 'home'
