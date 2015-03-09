@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   root "staticpages#home"
 
   get '/'       => 'staticpages#home',   as: 'home'
-  
+  get '/ubers'   => 'ubers#index',         as: 'ubers'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
