@@ -1,0 +1,32 @@
+<div class="row" id="pwd-container">
+
+  <div class="col-md-4"></div>
+
+  <div class="col-md-4">
+    <section class="login-form">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin", :role => "login"}) do |f| %>
+
+      <img src="http://i.imgur.com/uk5qQO7.png" class="img-responsive" alt="" />
+      <%= devise_error_messages! %>
+
+      <%= f.email_field :email, autofocus: true, placeholder: :email, :class => "form-control input-lg" %>
+
+      <%= f.password_field :password, autocomplete: "off", :placeholder => "Password", :class => "form-control input-lg" %>
+
+      <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+      <% end -%>
+
+      <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Log in</button>
+      <% end %>
+
+      <div class="form-links">
+        <%= link_to "www.routeme.com", home_path %>
+      </div>
+    </section>  
+  </div>
+</div>
+
