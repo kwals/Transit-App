@@ -1,6 +1,6 @@
 class BikeShare
 require 'HTTParty'
-require "pry"
+
   
   @radius_number = 0.0025
 
