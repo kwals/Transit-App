@@ -1,4 +1,4 @@
-class BikeShare
+class Bikeshare
 require 'HTTParty'
 
   
