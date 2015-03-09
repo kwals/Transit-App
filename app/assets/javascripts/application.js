@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on("ready", function(){
+
+	var busTemplate = $(".bus-template").html();
+	var templates.bus = Handlebars.compile(busTemplate);
+
+})

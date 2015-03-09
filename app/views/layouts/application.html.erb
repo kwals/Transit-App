@@ -4,13 +4,22 @@
   <title>TransitApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!--            -->
+
 </head>
 <body>
-
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
 <%= yield %>
+
+
+<script type = "x-handlebars-template" class = "bus-template">
+	<li>{{item}}</li>
+</script>
 
 </body>
 </html>
