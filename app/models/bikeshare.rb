@@ -10,7 +10,7 @@ require 'HTTParty'
   end 
 
   
-  def self.bikes_nearby(lat, long) 
+  def self.bikes_nearby(long, lat) 
     stations_array = self.scrape
     lat_max = lat.to_f + @radius_number.to_f
     lat_min = lat.to_f - @radius_number.to_f
