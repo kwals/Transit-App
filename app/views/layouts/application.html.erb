@@ -49,9 +49,57 @@
 
   <div class="container">
 
+
 <%= yield %>
   
   </div>
+
+
+<!-- Templates -->
+
+<script type = "x-handlebars-template" class = "bus-template">
+  <tr class = "{{id}}">
+    <td>{{status}}</td>
+    <td>{{location}}</td>
+    <td>{{time}}</td>
+  </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "rail-template">
+  <tr class = "{{id}}">
+    <td>{{line}}</td>
+    <td>{{stop}}</td>
+    <td>{{time}}</td>
+  </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "zipcar-template">
+  <tr>
+    <td>{{status}}</td>
+    <td>{{location}}</td>
+    <td>{{nov}}</td>
+  </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "uber-template">
+  <tr>
+    <td>{{type}}</td>
+    <td>{{nov}}</td>
+  </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "capital-bikeshare-template">
+  <tr>
+    <td>{{status}}</td>
+    <td>{{location}}</td>
+    <td>{{bikes}}</td>
+    <td>{{empty}}</td>
+  </tr>
+</script>
+
+<!-- end Templates -->
+
+
 
 </body>
 </html>
