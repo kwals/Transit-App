@@ -26,3 +26,14 @@ table{
 .hidden{
 	display: none;
 }
+
+.time{
+	float: right;
+    font-size: 30px;
+    border-bottom: 4px solid;
+    display: inline-block;
+}
+
+.welcome{
+	display: inline-block;
+}
