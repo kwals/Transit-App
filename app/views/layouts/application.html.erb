@@ -50,6 +50,7 @@
   <div class="container">
 
 
+
 <%= yield %>
   
   </div>
@@ -58,7 +59,7 @@
 <!-- Templates -->
 
 <script type = "x-handlebars-template" class = "bus-template">
-  <tr class = "{{id}}">
+  <tr>
     <td>{{status}}</td>
     <td>{{location}}</td>
     <td>{{time}}</td>
@@ -66,7 +67,7 @@
 </script>
 
 <script type = "x-handlebars-template" class = "rail-template">
-  <tr class = "{{id}}">
+  <tr>
     <td>{{line}}</td>
     <td>{{stop}}</td>
     <td>{{time}}</td>
@@ -90,11 +91,17 @@
 
 <script type = "x-handlebars-template" class = "capital-bikeshare-template">
   <tr>
-    <td>{{status}}</td>
-    <td>{{location}}</td>
+    <td>{{name}}</td>
     <td>{{bikes}}</td>
     <td>{{empty}}</td>
   </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "metro-bus-stop-template">
+  <table class = "bus-stop">
+    <th>{{name}}</th>
+    <th>{{interval}}</th>
+  </table>
 </script>
 
 <!-- end Templates -->
