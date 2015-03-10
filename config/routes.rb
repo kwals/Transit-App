@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/'             =>  'staticpages#home',     as: 'home'
   get '/bikeshares'   =>  'bikeshares#index',     as: 'bikeshares'
   get '/buses'        =>  'buses#index',          as: 'buses'
-  get '/trains'       =>  'rails#index',          as: 'trains'
+  get '/trains'       =>  'trains#index',         as: 'trains'
   get '/ubers'        =>  'ubers#index',          as: 'ubers'
   get '/zipcars'      =>  'zipcars#index',        as: 'zipcars'
 
