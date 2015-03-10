@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "staticpages#home"
 
   get '/'             =>  'staticpages#home',     as: 'home'
+  get '/dashboard'    =>  'staticpages#home',     as: 'dashboard'
+
   get '/bikeshares'   =>  'bikeshares#index',     as: 'bikeshares'
   get '/buses'        =>  'buses#index',          as: 'buses'
   get '/trains'       =>  'trains#index',         as: 'trains'
