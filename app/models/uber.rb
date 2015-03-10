@@ -6,11 +6,6 @@ class Uber
   UBER_SERVER_KEY = Figaro.env.UBER_SERVER_KEY
 
   def self.fetch_uber_product_list(params)
-    # FIXME hardcoded params
-    params = { 
-      "lat"   =>  38.85342, 
-      "long"  =>  -77.04952
-    }
     request = get("/products?latitude=#{params["lat"]}&longitude=#{params["long"]}",
        headers: {"Authorization" => "Token #{UBER_SERVER_KEY}"}
     )
@@ -27,11 +22,7 @@ class Uber
   end
 
   def self.fetch_ubers_around_me(params, product_id)
-    # FIXME hardcoded params
-    params = { 
-      "lat"   =>  38.85342, 
-      "long"  =>  -77.04952
-    }
+    # FIXME Not filtering by product_id type
     request = get("/estimates/time?start_latitude=#{params["lat"]}&start_longitude=#{params["long"]}&product_id=#{product_id}",
        headers: {"Authorization" => "Token #{UBER_SERVER_KEY}"}
     )
