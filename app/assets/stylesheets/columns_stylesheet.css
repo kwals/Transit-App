@@ -1,0 +1,39 @@
+th{
+	font-size: 18px;
+	border-bottom: 4px solid black;
+	padding: 5px;
+}
+
+td{
+	min-width: 20px;
+	padding-top: 5px;
+}
+
+table{
+	font-size: 18px;
+	width: 100%;
+}
+
+.table{
+	font-size: 18px;
+	text-align: center;
+}
+
+.capital{
+	font-size: 24px;
+}
+
+.hidden{
+	display: none;
+}
+
+.time{
+	float: right;
+    font-size: 30px;
+    border-bottom: 4px solid;
+    display: inline-block;
+}
+
+.welcome{
+	display: inline-block;
+}

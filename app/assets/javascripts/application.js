@@ -19,10 +19,10 @@
 
 $(document).on("ready", function(){
 
-	getLocation(callbackFun);
+	//getLocation(callbackFun);
 	templatesRender();
-	updateAll();
-
+	loadButton();
+	startTime();
 
 })
 
@@ -36,6 +36,14 @@ var sample_data = {
 	empty: "13"
 };
 
+var currentLocation = {
+
+};
+
+var data = {
+
+};
+
 var templatesRender = function(){
 
 	var busTemplate = $(".bus-template").html();
@@ -43,7 +51,7 @@ var templatesRender = function(){
 	var railTemplate = $(".rail-template").html();
 	templates.zipcar = Handlebars.compile(railTemplate);
 	var zipcarTemplate = $('.zipcar-template').html();
-	templates.metro = Handlebars.compile(zipcarTemplate)
+	templates.zipcar = Handlebars.compile(zipcarTemplate)
 	var uberTemplate = $('.uber-template').html();
 	templates.uber = Handlebars.compile(uberTemplate);
 	var bikeshareTemplate = $('.capital-bikeshare-template').html();
@@ -54,15 +62,15 @@ var templatesRender = function(){
 
 var updateAll = function(){
 
+	getBikeshare(currentLocation);
+	//getMetroRail(currentLocation);
+	//getMetroBus(currentLocation);
+
 	// $('.metro-bus-table').append(templates.bus(sample_data));
 	// $('.metro-rail-table').append(templates.rail(sample_data));
 	// $('.bikeshare-table').append(templates.bikeshare(sample_data));
 	// $('.uber-table').append(templatens.uber(sample_data));
 	// $('.zipcar-table').append(templates.zipcar(sample_data));
-
-}
-
-var currentLocation = {
 
 }
 
@@ -72,11 +80,13 @@ var callbackFun = function(data){
 	currentLocation.lat = data.coords.latitude;
 	currentLocation.long = data.coords.longitude;
 
+	updateAll();
+
 }
 
 var getLocation = function(callback){
 
-	navigator.geolocation.getCurrentPosition(callback);
+	navigator.geolocation.getCurrentPosition(callbackFun);
 
 }
 
@@ -91,25 +101,139 @@ var postLocation = function(){
 }
 
 //hopefully this is what we need
-var getMetro = function(data){
+var getMetroBus = function(location){
 
 	$.ajax({
 		type: "GET",
-		url: "/Metro-Bus",
-		data: data
+		url: "/buses",
+		data: location,
+		success: function(result){
+			console.log(result)
+			data.metroBus = result;
+			listMetroBus();
+		}
+	})
+
+}
+var listMetroBus = function(){
+
+	if(data.metrobus.length > 0){
+		$('.metro-bus-table').removeClass("hidden");
+	}
+
+	for(var i = 0 ; i < data.metrobus.length ; i++){
+		$('.metro-bus-table').append(templates.bus(data.metrobus[i]));
+	}
+
+}
+
+var getMetroRail = function(location){
+
+	$.ajax({
+		type: "GET",
+		url: "/metro",
+		data: location,
+		success: function(result){
+			data.metroRail = result;
+			console.log(result);
+			listMetroRail();
+		}
 	})
 
 }
 
-var getBikeshare = function(data){
+var listMetroRail = function(){
+
+	if(data.metroRail.length > 0){
+		$('.metro-rail-table').removeClass("hidden");
+	}
+
+	for(var i = 0 ; i < data.bikeshare.length ; i++){
+		$('.bikeshare-table').append(templates.rail(data.metroRail[i]));
+	}
+
+}
+
+var getUber = function(location){
 
 	$.ajax({
 		type: "GET",
-		url: "/bikeshare",
-		data: data
+		url: "/uber",
+		data: location,
+		success: function(result){
+			data.uber = result;
+			console.log(result);
+			listUber();
+		}
 	})
 
 }
+
+
+
+var listUber = function(){
+
+	if(data.bikeshare.length > 0){
+		$('.uber-table').removeClass("hidden");
+	}
+
+	for(var i = 0 ; i < data.bikeshare.length ; i++){
+		$('.uber-table').append(templates.uber(data.uber[i]));
+	}
+
+}
+
+var getBikeshare = function(location){
+
+	$.ajax({
+		type: "GET",
+		url: "/bikeshares",
+		data: location,
+		success: function(result){
+			data.bikeshare = result;
+			console.log(result);
+			listBikeshare();
+		}
+	})
+
+}
+
+var listBikeshare = function(){
+
+	if(data.bikeshare.length > 0){
+		$('.bikeshare-table').removeClass("hidden");
+	}
+
+	for(var i = 0 ; i < data.bikeshare.length ; i++){
+		$('.bikeshare-table').append(templates.bikeshare(data.bikeshare[i]));
+	}
+
+}
+
+var loadButton = function(){
+
+	$('#load-content').click(function(){
+		getLocation();
+	})
+
+}
+
+var startTime = function() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    $('.time').html(h+":"+m+":"+s);
+    var t = setTimeout(function(){startTime()},500);
+}
+
+var checkTime = function(i) {
+    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
 
 /*
 make calls to these, pass longitude and latitude
