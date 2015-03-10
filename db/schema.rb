@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309150630) do
+ActiveRecord::Schema.define(version: 20150310195615) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.string  "name",    null: false
+    t.string  "lat",     null: false
+    t.string  "long",    null: false
+    t.integer "user_id"
+  end
+
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

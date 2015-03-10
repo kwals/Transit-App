@@ -1,0 +1,9 @@
+<%= form_tag(favorites_path, method: "POST", class: "form-inline") do %>
+  <label>name</label>
+  <%= text_field_tag 'name', nil, placeholder: 'e.g. Home', class: 'form-control' %><br>
+  <label>latitude</label>
+  <%= text_field_tag 'lat', nil, placeholder: 'e.g. 38.85342', class: 'form-control' %><br>
+  <label>longitude</label>
+  <%= text_field_tag 'long', nil, placeholder: 'e.g. -77.04952', class: 'form-control' %><br>
+  <%= submit_tag 'Submit', class: 'btn btn-default' %>
+<% end %>
