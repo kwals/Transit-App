@@ -61,19 +61,14 @@
 
 <!-- Templates -->
 
-<script type = "x-handlebars-template" class = "bus-template">
-  <tr>
-    <td>{{status}}</td>
-    <td>{{location}}</td>
-    <td>{{time}}</td>
-  </tr>
-</script>
 
 <script type = "x-handlebars-template" class = "rail-template">
   <tr>
     <td>{{Line}}</td>
     <td>{{DestinationName}}</td>
     <td>{{Min}}</td>
+    <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{DestinationName}}' type='submit'>Remove</button></td>
+    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{DestinationName}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -89,6 +84,8 @@
   <tr>
     <td>{{display_name}}</td>
     <td>{{estimate}}</td>
+    <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{display_name}}' type='submit'>Remove</button></td>
+    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{display_name}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -97,18 +94,22 @@
     <td>{{name}}</td>
     <td>{{bikes}}</td>
     <td>{{empty}}</td>
+    <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{name}}' type='submit'>Remove</button></td>
+    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{name}}' type='submit'>Fav</button></td>
+  </tr>
+</script>
+
+<script type = "x-handlebars-template" class = "bus-template">
+  <tr>
+    <td>{{RouteID}}</td>
+    <td>{{DirectionText}}</td>
+    <td>{{Minutes}}</td>
+      <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{RouteID}}' type='submit'>Remove</button></td>
+      <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{RouteID}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
 
-
-<script type = "x-handlebars-template" class = "metro-bus-header-template">
-        <table class = "bus-stop">
-        <caption>{{LocationName}}</caption>
-          <th>{{name}}</th>
-          <th>{{interval}}</th>
-        </table>
-</script>
 
 <script type="x-handlebars-template" class = "uber-header-template">
           <table class = "uber-table">
@@ -144,6 +145,14 @@
       </table>
 </script>
 
+<script type="x-handlebars-template" class="metro-bus-header-template">
+        <table class = "metro-bus-table">
+          <caption>{{LocationName}}</caption>
+          <th>Route ID</th>
+          <th>Direction</th>
+          <th>Min</th>
+        </table>
+</script>
 
 <script type="x-handlebars-template" class = "logo-template">
  <img class = "{{className}} logo" src = "{{src}}"/>
