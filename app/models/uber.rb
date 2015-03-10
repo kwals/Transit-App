@@ -1,6 +1,6 @@
-class Uber < ActiveRecord::Base
+class Uber 
   include HTTParty
-  base_uri 'https://api.uber.com/v1/products'
+  base_uri 'https://api.uber.com/v1'
   default_params latitude: '38.85795', longitude: '77.04895'
 
   format :json
