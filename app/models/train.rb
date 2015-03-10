@@ -5,9 +5,9 @@ class Train
   
   WMATA_KEY = Figaro.env.WMATA_KEY
 
-  def self.fetch_nearest_stations(params)
+  def self.fetch_nearest_stations(params, radius)
     # TODO Radius currently hardcoded as 400
-    request = get("/Rail.svc/json/jStationEntrances?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=600&api_key=#{WMATA_KEY}")
+    request = get("/Rail.svc/json/jStationEntrances?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=#{radius}&api_key=#{WMATA_KEY}")
     stations = []
     request["Entrances"].each do |station|
       stations << station["StationCode1"] unless stations.include?(station)
