@@ -10,14 +10,14 @@ require 'HTTParty'
   def self.bikes_nearby(params) 
     
     if params[:radius].nil?
-      radius = 0.025 
+      radius = 0.0025 
     else 
       radius = params[:radius]
     end
 
     lat = params[:lat]
     long = params[:long]
-    
+
     stations_array = self.scrape
     lat_max  = lat.to_f  + radius.to_f
     lat_min  = lat.to_f  - radius.to_f
