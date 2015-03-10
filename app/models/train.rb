@@ -7,7 +7,7 @@ class Train
 
   def self.fetch_nearest_stations(params)
     # TODO Radius currently hardcoded as 400
-    request = get("/Rail.svc/json/jStationEntrances?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=400&api_key=#{WMATA_KEY}")
+    request = get("/Rail.svc/json/jStationEntrances?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=600&api_key=#{WMATA_KEY}")
     stations = []
     request["Entrances"].each do |station|
       stations << station["StationCode1"] unless stations.include?(station)
