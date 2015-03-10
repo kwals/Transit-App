@@ -4,13 +4,15 @@ Rails.application.routes.draw do
   root "staticpages#home"
 
   get '/'             =>  'staticpages#home',     as: 'home'
-  get '/dashboard'    =>  'staticpages#home',     as: 'dashboard'
 
   get '/bikeshares'   =>  'bikeshares#index',     as: 'bikeshares'
   get '/buses'        =>  'buses#index',          as: 'buses'
   get '/trains'       =>  'trains#index',         as: 'trains'
   get '/ubers'        =>  'ubers#index',          as: 'ubers'
-  get '/zipcars'      =>  'zipcars#index',        as: 'zipcars'
+  # get '/zipcars'      =>  'zipcars#index',        as: 'zipcars'
+
+  resources :favorites, only: [:create, :index]
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
