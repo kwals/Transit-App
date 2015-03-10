@@ -63,6 +63,7 @@ var templatesRender = function(){
 var updateAll = function(){
 
 	getBikeshare(currentLocation);
+	getUber(currentLocation);
 	//getMetroRail(currentLocation);
 	//getMetroBus(currentLocation);
 
@@ -71,6 +72,8 @@ var updateAll = function(){
 	// $('.bikeshare-table').append(templates.bikeshare(sample_data));
 	// $('.uber-table').append(templatens.uber(sample_data));
 	// $('.zipcar-table').append(templates.zipcar(sample_data));
+
+	var u = setTimeout(function(){updateAll()}, 60000);
 
 }
 
@@ -115,7 +118,35 @@ var getMetroBus = function(location){
 	})
 
 }
+
 var listMetroBus = function(){
+
+	if(data.metrobus.length > 0){
+		$('.metro-bus-table').removeClass("hidden");
+	}
+
+	for(var i = 0 ; i < data.metrobus.length ; i++){
+		$('.metro-bus-table').append(templates.bus(data.metrobus[i]));
+	}
+
+}
+
+var getZipcar = function(location){
+
+	$.ajax({
+		type: "GET",
+		url: "/zipcars",
+		data: location,
+		success: function(result){
+			console.log(result)
+			data.zipcar = result;
+			listZipcar();
+		}
+	})
+
+}
+
+var listZipcar = function(){
 
 	if(data.metrobus.length > 0){
 		$('.metro-bus-table').removeClass("hidden");
@@ -131,7 +162,7 @@ var getMetroRail = function(location){
 
 	$.ajax({
 		type: "GET",
-		url: "/metro",
+		url: "/trains",
 		data: location,
 		success: function(result){
 			data.metroRail = result;
@@ -158,7 +189,7 @@ var getUber = function(location){
 
 	$.ajax({
 		type: "GET",
-		url: "/uber",
+		url: "/ubers",
 		data: location,
 		success: function(result){
 			data.uber = result;
@@ -173,11 +204,11 @@ var getUber = function(location){
 
 var listUber = function(){
 
-	if(data.bikeshare.length > 0){
+	if(data.uber.length > 0){
 		$('.uber-table').removeClass("hidden");
 	}
 
-	for(var i = 0 ; i < data.bikeshare.length ; i++){
+	for(var i = 0 ; i < data.uber.length ; i++){
 		$('.uber-table').append(templates.uber(data.uber[i]));
 	}
 
