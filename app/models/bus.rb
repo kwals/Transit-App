@@ -5,9 +5,10 @@ class Bus
 
   WMATA_KEY = Figaro.env.WMATA_KEY
 
-
-  def self.fetch_nearest_stops(params, radius)
-    request = get("/Bus.svc/json/jStops?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=#{radius}&api_key=#{WMATA_KEY}")
+  def self.fetch_nearest_stops(params)
+    # TODO Radius currently hardcoded as 250
+    params["radius"] = 250 if params["radius"].nil?
+    request = get("/Bus.svc/json/jStops?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=#{params["radius"]}&api_key=#{WMATA_KEY}")
     stops = {}
     request["Stops"].each do |stop|
       stops[stop["StopID"]] = stop["Name"] unless stops.keys.include?(stop["StopID"])
