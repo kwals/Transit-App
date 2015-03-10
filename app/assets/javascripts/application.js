@@ -44,18 +44,30 @@ var data = {
 
 };
 
+var timouts = {
+
+}
+
 var templatesRender = function(){
 
 	var busTemplate = $(".bus-template").html();
 	templates.bus = Handlebars.compile(busTemplate);
 	var railTemplate = $(".rail-template").html();
-	templates.zipcar = Handlebars.compile(railTemplate);
+	templates.rail = Handlebars.compile(railTemplate);
 	var zipcarTemplate = $('.zipcar-template').html();
 	templates.zipcar = Handlebars.compile(zipcarTemplate)
 	var uberTemplate = $('.uber-template').html();
 	templates.uber = Handlebars.compile(uberTemplate);
 	var bikeshareTemplate = $('.capital-bikeshare-template').html();
 	templates.bikeshare = Handlebars.compile(bikeshareTemplate);
+	var uberHeaderTemplate = $('.uber-header-template').html()
+	templates.uberHeader = Handlebars.compile(uberHeaderTemplate);
+	var bikeshareHeaderTemplate = $('.bikeshare-header-template').html();
+	templates.bikeshareHeader = Handlebars.compile(bikeshareHeaderTemplate);
+	var zipcarHeaderTemplate = $('.zipcar-header-template').html();
+	templates.zipcarHeader = Handlebars.compile(zipcarHeaderTemplate);
+	var railHeaderTemplate = $('.metro-rail-header-template').html();
+	templates.railHeader = Handlebars.compile(railHeaderTemplate);
 
 }
 
@@ -64,7 +76,8 @@ var updateAll = function(){
 
 	getBikeshare(currentLocation);
 	getUber(currentLocation);
-	//getMetroRail(currentLocation);
+	getMetroRail(currentLocation);
+
 	//getMetroBus(currentLocation);
 
 	// $('.metro-bus-table').append(templates.bus(sample_data));
@@ -73,7 +86,8 @@ var updateAll = function(){
 	// $('.uber-table').append(templatens.uber(sample_data));
 	// $('.zipcar-table').append(templates.zipcar(sample_data));
 
-	var u = setTimeout(function(){updateAll()}, 60000);
+	clearTimeout(timouts.update);
+	timouts.update = setTimeout(function(){updateAll()}, 60000);
 
 }
 
@@ -148,12 +162,14 @@ var getZipcar = function(location){
 
 var listZipcar = function(){
 
-	if(data.metrobus.length > 0){
-		$('.metro-bus-table').removeClass("hidden");
+	$('.zipcar').html("");
+
+	if(data.zipcar.length > 0){
+		$('.zipcar').append(templates.zipcarHeader);
 	}
 
 	for(var i = 0 ; i < data.metrobus.length ; i++){
-		$('.metro-bus-table').append(templates.bus(data.metrobus[i]));
+		$('.zipcar-table').append(templates.zipcar(data.zipcar[i]));
 	}
 
 }
@@ -175,12 +191,16 @@ var getMetroRail = function(location){
 
 var listMetroRail = function(){
 
+	$('.metro-rail').html('');
+
+	
+
 	if(data.metroRail.length > 0){
-		$('.metro-rail-table').removeClass("hidden");
+		$('.metro-rail').append(templates.railHeader({}));
 	}
 
-	for(var i = 0 ; i < data.bikeshare.length ; i++){
-		$('.bikeshare-table').append(templates.rail(data.metroRail[i]));
+	for(var i = 0 ; i < 5 /*data.metroRail.length*/ ; i++){
+		$('.metro-rail-table').append(templates.rail(data.metroRail[i]));
 	}
 
 }
@@ -204,8 +224,10 @@ var getUber = function(location){
 
 var listUber = function(){
 
+	$('.uber').html("");
+
 	if(data.uber.length > 0){
-		$('.uber-table').removeClass("hidden");
+		$('.uber').append(templates.uberHeader({}));
 	}
 
 	for(var i = 0 ; i < data.uber.length ; i++){
@@ -231,8 +253,10 @@ var getBikeshare = function(location){
 
 var listBikeshare = function(){
 
+	$('.bikeshare').html("");
+
 	if(data.bikeshare.length > 0){
-		$('.bikeshare-table').removeClass("hidden");
+		$('.bikeshare').append(templates.bikeshareHeader({}));
 	}
 
 	for(var i = 0 ; i < data.bikeshare.length ; i++){
@@ -257,7 +281,7 @@ var startTime = function() {
     m = checkTime(m);
     s = checkTime(s);
     $('.time').html(h+":"+m+":"+s);
-    var t = setTimeout(function(){startTime()},500);
+    timouts.clock = setTimeout(function(){startTime()},500);
 }
 
 var checkTime = function(i) {

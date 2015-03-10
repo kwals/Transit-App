@@ -68,9 +68,9 @@
 
 <script type = "x-handlebars-template" class = "rail-template">
   <tr>
-    <td>{{line}}</td>
-    <td>{{stop}}</td>
-    <td>{{time}}</td>
+    <td>{{Line}}</td>
+    <td>{{DestinationName}}</td>
+    <td>{{Min}}</td>
   </tr>
 </script>
 
@@ -85,7 +85,7 @@
 <script type = "x-handlebars-template" class = "uber-template">
   <tr>
     <td>{{display_name}}</td>
-    <td>{{capacity}}</td>
+    <td>{{estimate}}</td>
   </tr>
 </script>
 
@@ -97,11 +97,50 @@
   </tr>
 </script>
 
-<script type = "x-handlebars-template" class = "metro-bus-stop-template">
+
+
+<script type = "x-handlebars-template" class = "metro-bus-header-template">
   <table class = "bus-stop">
     <th>{{name}}</th>
     <th>{{interval}}</th>
   </table>
+</script>
+
+<script type="x-handlebars-template" class = "uber-header-template">
+          <table class = "uber-table">
+            <th>Uber</th>
+            <th>Estimated Time (sec)</th>
+        </table>
+</script>
+
+<script type="x-handlebars-template" class = "bikeshare-header-template">
+          <table class = "bikeshare-table">
+            <th colspan="1">
+              Capital Bikeshare
+            </th>
+            <th>
+              # of Bikes
+            </th>
+            <th>
+              # Empty
+            </th>
+        </table>
+</script>
+
+<script type="x-handlebars-template" class = "zipcar-header-template">
+          <table class = "zipcar-table ">
+          <th>ZipCaR</th>
+          <th>Location</th>
+          <th>Vehicles</th>
+        </table>
+</script>
+
+<script type="x-handlebars-template" class = "metro-rail-header-template">
+      <table class = "metro-rail-table">
+        <th>{{LocationName}}</th>
+        <th>Destination</th>
+        <th>Minutes</th>
+      </table>
 </script>
 
 <!-- end Templates -->
