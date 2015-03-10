@@ -100,30 +100,27 @@
 
 
 <script type = "x-handlebars-template" class = "metro-bus-header-template">
-  <table class = "bus-stop">
-    <th>{{name}}</th>
-    <th>{{interval}}</th>
-  </table>
+        <table class = "bus-stop">
+        <caption>{{LocationName}}</caption>
+          <th>{{name}}</th>
+          <th>{{interval}}</th>
+        </table>
 </script>
 
 <script type="x-handlebars-template" class = "uber-header-template">
           <table class = "uber-table">
-            <th>Uber</th>
+          <caption>Uber</caption>
+            <th>Type</th>
             <th>Estimated Time (sec)</th>
         </table>
 </script>
 
 <script type="x-handlebars-template" class = "bikeshare-header-template">
           <table class = "bikeshare-table">
-            <th colspan="1">
-              Capital Bikeshare
-            </th>
-            <th>
-              # of Bikes
-            </th>
-            <th>
-              # Empty
-            </th>
+          <caption>Capital Bikeshare</caption>
+            <th>Station</th>
+            <th># of Bikes</th>
+            <th># Empty</th>
         </table>
 </script>
 
@@ -137,7 +134,8 @@
 
 <script type="x-handlebars-template" class = "metro-rail-header-template">
       <table class = "metro-rail-table">
-        <th>{{LocationName}}</th>
+        <caption>{{LocationName}}</caption>
+        <th>Line</th>
         <th>Destination</th>
         <th>Minutes</th>
       </table>
@@ -145,7 +143,7 @@
 
 
 <script type="x-handlebars-template" class = "logo-template">
- <img class = "{{className}}" src = "{{src}}"/>
+ <img class = "{{className}} logo" src = "{{src}}"/>
  </script>
 
 <!-- end Templates -->

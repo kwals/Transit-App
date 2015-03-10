@@ -17,13 +17,11 @@ class Bus
 
   def self.fetch_next_buses(stops)
     predictions = []
-    binding.pry
     stops.each do |stop|
       request = get("/NextBusService.svc/json/jPredictions?StopID=#{stop}&api_key=#{WMATA_KEY}")
       predictions << request["Predictions"].try(:first)
-      binding.pry
     end
-    binding.pry
+    predictions
   end
 
 end

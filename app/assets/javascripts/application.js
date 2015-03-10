@@ -47,7 +47,10 @@ var data = {
 
 var timouts = {
 
-}
+};
+
+var deleteButtonString = "<button class='btn btn-default remove-button' type='submit'>Remove</button>";
+var favoriteButtonString = "<button class='btn btn-default fav-button' type='submit'>Fav</button>";
 
 var templatesRender = function(){
 
@@ -113,15 +116,15 @@ var getLocation = function(callback){
 
 }
 
-var postLocation = function(){
+// var postLocation = function(){
 
-	$.ajax({
-	  type: "POST",
-	  url: "/users/1/locate",
-	  data: currentLocation
-	});
+// 	$.ajax({
+// 	  type: "POST",
+// 	  url: "/users/1/locate",
+// 	  data: currentLocation
+// 	});
 
-}
+// }
 
 var hideAll = function(){
 	$('.bikeshare').hide();
@@ -129,6 +132,12 @@ var hideAll = function(){
 	$('.metro-rail').hide();
 	$('.uber').hide();
 	$('.zipcar').hide();
+}
+
+var removeButton = function(){
+	$('.remove-button').on('click',function(){
+		$(this).parent()
+	})
 }
 
 //hopefully this is what we need
@@ -149,9 +158,14 @@ var getMetroBus = function(location){
 
 var listMetroBus = function(){
 
+	var metroBusLogo = {
+		className: "metro-bus-logo",
+		src: "assets/bus_logo.gif"
+	}
+
 	if(data.metrobus.length > 0){
 		$('.metro-bus').show()
-		//$('.metro-bus-table').removeClass("hidden");
+		$('.metro-bus').append(templates.logo(metroBusLogo));
 	}
 	else{
 		$('.metro-bus').hide();
@@ -231,14 +245,14 @@ var listMetroRail = function(){
 
 	console.log(locations)
 
-	var sampleLogoObj = {
+	var metroRailLogo = {
 		className: "metro-rail-logo",
-		src: "metro_logo.png"
+		src: "/assets/metro_logo.png"
 	}
 
 	if(locations.length > 0){
 		$('.metro-rail').show();
-		$('.metro-rail').append(templates.logo(sampleLogoObj))
+		$('.metro-rail').append(templates.logo(metroRailLogo))
 	}
 	else{
 		$('.metro-rail').hide();
@@ -310,10 +324,16 @@ var getBikeshare = function(location){
 
 var listBikeshare = function(){
 
+	var bikeshareLogoObj = {
+		className: "bikeshare-logo",
+		src: "/assets/cb_logo.jpg"
+	}
+
 	$('.bikeshare').html("");
 
 	if(data.bikeshare.length > 0){
 		$('.bikeshare').show();
+		$('.bikeshare').append(templates.logo(bikeshareLogoObj));
 		$('.bikeshare').append(templates.bikeshareHeader({}));
 	}
 	else{
