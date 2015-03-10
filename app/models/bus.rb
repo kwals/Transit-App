@@ -8,22 +8,23 @@ class Bus
 
   def self.fetch_nearest_stops(params, radius)
     request = get("/Bus.svc/json/jStops?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=#{radius}&api_key=#{WMATA_KEY}")
-    stops = []
+    stops = {}
     request["Stops"].each do |stop|
-      stops << stop["StopID"] unless stops.include?(stop["StopID"])
+      stops[stop["StopID"]] = stop["Name"] unless stops.keys.include?(stop["StopID"])
     end
     stops
   end
 
   def self.fetch_next_buses(stops)
-    predictions = []
-    binding.pry
-    stops.each do |stop|
+    predictions = {}
+    stops.each do |stop, name|
       request = get("/NextBusService.svc/json/jPredictions?StopID=#{stop}&api_key=#{WMATA_KEY}")
-      predictions << request["Predictions"].try(:first)
-      binding.pry
+      if request["Predictions"]
+        p = request["Predictions"].first(3)
+        predictions[name] = p
+      end
     end
-    binding.pry
+    predictions
   end
 
 end
