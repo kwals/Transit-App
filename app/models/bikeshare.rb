@@ -1,9 +1,6 @@
 class Bikeshare
 require 'HTTParty'
 
-  
-  @radius_number = 0.0025
-
   def self.scrape
     info = HTTParty.get("http://www.capitalbikeshare.com/data/stations/bikeStations.xml")
     stations_array = info["stations"]["station"]
@@ -11,13 +8,21 @@ require 'HTTParty'
 
   
   def self.bikes_nearby(params) 
+    
+    if params[:radius].nil?
+      radius = 0.025 
+    else 
+      radius = params[:radius]
+    end
+
     lat = params[:lat]
     long = params[:long]
+    
     stations_array = self.scrape
-    lat_max = lat.to_f + @radius_number.to_f
-    lat_min = lat.to_f - @radius_number.to_f
-    long_max = long.to_f + @radius_number.to_f
-    long_min = long.to_f - @radius_number.to_f
+    lat_max  = lat.to_f  + radius.to_f
+    lat_min  = lat.to_f  - radius.to_f
+    long_max = long.to_f + radius.to_f
+    long_min = long.to_f - radius.to_f
     nearby_stations = []
     # Each station will be given as a hash
 
