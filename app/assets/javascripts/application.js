@@ -51,6 +51,7 @@ var timouts = {
 
 var templatesRender = function(){
 
+	//Each items
 	var busTemplate = $(".bus-template").html();
 	templates.bus = Handlebars.compile(busTemplate);
 	var railTemplate = $(".rail-template").html();
@@ -61,6 +62,7 @@ var templatesRender = function(){
 	templates.uber = Handlebars.compile(uberTemplate);
 	var bikeshareTemplate = $('.capital-bikeshare-template').html();
 	templates.bikeshare = Handlebars.compile(bikeshareTemplate);
+	//Headers
 	var uberHeaderTemplate = $('.uber-header-template').html()
 	templates.uberHeader = Handlebars.compile(uberHeaderTemplate);
 	var bikeshareHeaderTemplate = $('.bikeshare-header-template').html();
@@ -69,6 +71,9 @@ var templatesRender = function(){
 	templates.zipcarHeader = Handlebars.compile(zipcarHeaderTemplate);
 	var railHeaderTemplate = $('.metro-rail-header-template').html();
 	templates.railHeader = Handlebars.compile(railHeaderTemplate);
+	//Images and Logos
+	var logoTemplate = $('.logo-template').html();
+	templates.logo = Handlebars.compile(logoTemplate);
 
 }
 
@@ -212,7 +217,7 @@ var listMetroRail = function(){
 
 	var locations = [];
 
-	for( var i = 0 ; i < 5 ; i ++ ){
+	for( var i = 0 ; i < data.metroRail.length ; i ++ ){
 		var isNewLocation = true;
 		for( var j = 0 ; j < locations.length ; j++ ){
 			if( locations[j] === data.metroRail[i].LocationName){
@@ -226,8 +231,14 @@ var listMetroRail = function(){
 
 	console.log(locations)
 
+	var sampleLogoObj = {
+		className: "metro-rail-logo",
+		src: "metro_logo.png"
+	}
+
 	if(locations.length > 0){
 		$('.metro-rail').show();
+		$('.metro-rail').append(templates.logo(sampleLogoObj))
 	}
 	else{
 		$('.metro-rail').hide();
@@ -241,7 +252,7 @@ var listMetroRail = function(){
 		$('.metro-rail').append(templates.railHeader(locationObj));
 	}
 
-	for(var i = 0 ; i < 5 /*data.metroRail.length*/ ; i++){
+	for(var i = 0 ; i < data.metroRail.length ; i++){
 		$('.metro-rail-table').append(templates.rail(data.metroRail[i]));
 	}
 
