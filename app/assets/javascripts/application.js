@@ -20,6 +20,7 @@
 $(document).on("ready", function(){
 
 	//getLocation(callbackFun);
+	hideAll();
 	templatesRender();
 	loadButton();
 	startTime();
@@ -117,6 +118,14 @@ var postLocation = function(){
 
 }
 
+var hideAll = function(){
+	$('.bikeshare').hide();
+	$('.metro-bus').hide();
+	$('.metro-rail').hide();
+	$('.uber').hide();
+	$('.zipcar').hide();
+}
+
 //hopefully this is what we need
 var getMetroBus = function(location){
 
@@ -136,7 +145,11 @@ var getMetroBus = function(location){
 var listMetroBus = function(){
 
 	if(data.metrobus.length > 0){
-		$('.metro-bus-table').removeClass("hidden");
+		$('.metro-bus').show()
+		//$('.metro-bus-table').removeClass("hidden");
+	}
+	else{
+		$('.metro-bus').hide();
 	}
 
 	for(var i = 0 ; i < data.metrobus.length ; i++){
@@ -165,7 +178,11 @@ var listZipcar = function(){
 	$('.zipcar').html("");
 
 	if(data.zipcar.length > 0){
+		$('.zipcar').show();
 		$('.zipcar').append(templates.zipcarHeader);
+	}
+	else {
+		$('.zipcar').hide();
 	}
 
 	for(var i = 0 ; i < data.metrobus.length ; i++){
@@ -193,10 +210,35 @@ var listMetroRail = function(){
 
 	$('.metro-rail').html('');
 
-	
+	var locations = [];
 
-	if(data.metroRail.length > 0){
-		$('.metro-rail').append(templates.railHeader({}));
+	for( var i = 0 ; i < 5 ; i ++ ){
+		var isNewLocation = true;
+		for( var j = 0 ; j < locations.length ; j++ ){
+			if( locations[j] === data.metroRail[i].LocationName){
+				isNewLocation = false;
+			}
+		}
+		if(isNewLocation){
+			locations.push(data.metroRail[i].LocationName);
+		}
+	}
+
+	console.log(locations)
+
+	if(locations.length > 0){
+		$('.metro-rail').show();
+	}
+	else{
+		$('.metro-rail').hide();
+	}
+
+	for( var i = 0 ; i < locations.length ; i++){
+		var locationObj = {
+			LocationName: locations[i]
+		}
+		console.log(locationObj)
+		$('.metro-rail').append(templates.railHeader(locationObj));
 	}
 
 	for(var i = 0 ; i < 5 /*data.metroRail.length*/ ; i++){
@@ -227,7 +269,11 @@ var listUber = function(){
 	$('.uber').html("");
 
 	if(data.uber.length > 0){
+		$('.uber').show();
 		$('.uber').append(templates.uberHeader({}));
+	}
+	else{
+		$('.uber').hide();
 	}
 
 	for(var i = 0 ; i < data.uber.length ; i++){
@@ -256,7 +302,11 @@ var listBikeshare = function(){
 	$('.bikeshare').html("");
 
 	if(data.bikeshare.length > 0){
+		$('.bikeshare').show();
 		$('.bikeshare').append(templates.bikeshareHeader({}));
+	}
+	else{
+		$('.bikeshare').hide();
 	}
 
 	for(var i = 0 ; i < data.bikeshare.length ; i++){
