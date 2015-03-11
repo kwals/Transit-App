@@ -67,8 +67,6 @@
     <td>{{Line}}</td>
     <td>{{DestinationName}}</td>
     <td>{{Min}}</td>
-    <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{DestinationName}}' type='submit'>Remove</button></td>
-    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{DestinationName}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -85,7 +83,6 @@
     <td>{{display_name}}</td>
     <td>{{estimate}}</td>
     <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{display_name}}' type='submit'>Remove</button></td>
-    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{display_name}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -95,7 +92,6 @@
     <td>{{bikes}}</td>
     <td>{{empty}}</td>
     <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{name}}' type='submit'>Remove</button></td>
-    <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{name}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -104,8 +100,6 @@
     <td>{{RouteID}}</td>
     <td>{{DirectionText}}</td>
     <td>{{Minutes}}</td>
-      <td class = "td-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{RouteID}}' type='submit'>Remove</button></td>
-      <td class = "td-button"><button class='btn btn-default fav-button' onclick = 'favFun(this.id)' id = '{{RouteID}}' type='submit'>Fav</button></td>
   </tr>
 </script>
 
@@ -138,7 +132,7 @@
 
 <script type="x-handlebars-template" class = "metro-rail-header-template">
       <table class = "metro-rail-table">
-        <caption>{{LocationName}}</caption>
+        <caption><span class = "top-remove-button"><button class='btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{LocationName}}' type='submit'>Remove</button></span>{{LocationName}}</caption>
         <th>Line</th>
         <th>Destination</th>
         <th>Minutes</th>
@@ -147,7 +141,7 @@
 
 <script type="x-handlebars-template" class="metro-bus-header-template">
         <table class = "metro-bus-table">
-          <caption>{{LocationName}}</caption>
+          <caption><button class='top-remove-button btn btn-default remove-button' onclick = 'removeFun(this.id)' id = '{{LocationName}}' type='submit'>Remove</button>{{LocationName}}</caption>
           <th>Route ID</th>
           <th>Direction</th>
           <th>Min</th>

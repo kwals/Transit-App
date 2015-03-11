@@ -24,7 +24,7 @@ $(document).on("ready", function(){
 	templatesRender();
 	loadButton();
 	startTime();
-	selectFavorites();
+	selectDisplay();
 
 })
 
@@ -93,21 +93,24 @@ var templatesRender = function(){
 
 var updateAll = function(){
 
-	getBikeshare(currentLocation);
-	getUber(currentLocation);
-	getMetroRail(currentLocation);
-	getMetroBus(currentLocation);
+	if(onFav){
+		//use variable with favorite location and make calls to get functions
+	}
+	else{
+		getBikeshare(currentLocation);
+		getUber(currentLocation);
+		getMetroRail(currentLocation);
+		getMetroBus(currentLocation);
 
-	// $('.metro-bus-table').append(templates.bus(sample_data));
-	// $('.metro-rail-table').append(templates.rail(sample_data));
-	// $('.bikeshare-table').append(templates.bikeshare(sample_data));
-	// $('.uber-table').append(templatens.uber(sample_data));
-	// $('.zipcar-table').append(templates.zipcar(sample_data));
+		// $('.metro-bus-table').append(templates.bus(sample_data));
+		// $('.metro-rail-table').append(templates.rail(sample_data));
+		// $('.bikeshare-table').append(templates.bikeshare(sample_data));
+		// $('.uber-table').append(templatens.uber(sample_data));
+		// $('.zipcar-table').append(templates.zipcar(sample_data));
 
-	clearTimeout(timouts.update);
-	timouts.update = setTimeout(function(){updateAll()}, 60000);
-
-	$('.')
+		clearTimeout(timouts.update);
+		timouts.update = setTimeout(function(){updateAll()}, 60000);
+	}
 
 }
 
@@ -130,13 +133,14 @@ var getLocation = function(callback){
 
 var resetRemoved = function(){
 	removedItems = [];
+	updateAll();
 }
 
 var resetFav = function(){
 	favItems = [];
 }
 
-var selectFavorites = function(){
+var selectDisplay = function(){
 
 	$('#nearest-button').on('click', function(){
 		$('#nearest-button').removeClass('inactive');
@@ -148,6 +152,7 @@ var selectFavorites = function(){
 		$('#favorite-button').addClass('inactive')
 		$('#favorite-button').addClass('btn-default');
 		onFav = false;
+		updateAll();
 	})
 
 	$('#favorite-button').on('click',function(){
@@ -160,6 +165,7 @@ var selectFavorites = function(){
 		$('#favorite-button').addClass('active')
 		$('#favorite-button').addClass('btn-primary');
 		onFav = true;
+		updateAll;
 	})
 
 }
@@ -184,13 +190,26 @@ var checkRemoved = function(item){
 	return true;
 }
 
-var favFun = function(id){
-	console.log(id)
+var saveFavorite = function(){
 
-	if( _.indexOf(favItems, id) === -1 ){
-		favItems.push(id)
-	}
+	$.ajax({
+		url: "/favorites",
+		type: "POST",
+		data: currentLocation,
+		success: function(result){
+			console.log(result)
+		}
+	})
+
 }
+
+// var favFun = function(id){
+// 	console.log(id)
+
+// 	if( _.indexOf(favItems, id) === -1 ){
+// 		favItems.push(id)
+// 	}
+// }
 
 var loadButton = function(){
 
@@ -245,11 +264,13 @@ var listMetroBus = function(){
 	}
 
 	_.each(_.keys(data.metroBus), function(key){
-		var tempObj = {LocationName: key};
-		$('.metro-bus').append(templates.busHeader(tempObj));
-		for(var i = 0 ; i < data.metroBus[key].length; i++){
-			$('.metro-bus-table:last-child').append(templates.bus(data.metroBus[key][i]));
-			//console.log(data.metroBus[key][i])
+		if(!(checkRemoved(key))){
+			var tempObj = {LocationName: key};
+			$('.metro-bus').append(templates.busHeader(tempObj));
+			for(var i = 0 ; i < data.metroBus[key].length; i++){
+				$('.metro-bus-table:last-child').append(templates.bus(data.metroBus[key][i]));
+				//console.log(data.metroBus[key][i])
+			}
 		}
 	})
 
@@ -318,7 +339,9 @@ var listMetroRail = function(){
 			}
 		}
 		if(isNewLocation){
-			locations.push(data.metroRail[i].LocationName);
+			if(!(checkRemoved(data.metroRail[i].LocationName))){
+				locations.push(data.metroRail[i].LocationName);
+			}
 		}
 	}
 
