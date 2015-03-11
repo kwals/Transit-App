@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "staticpages#home"
 
   get '/'             =>  'staticpages#home',     as: 'home'
+  get '/myfavorites'  =>  'staticpages#myfavorites', as: 'myfavorites'
+
   get '/input'        =>  'staticpages#input',    as: 'input'
 
   # JSON endpoints
