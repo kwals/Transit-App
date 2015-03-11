@@ -1,20 +1,21 @@
 <% provide(:title, "Home") %>
-<h1> HOME! </h1>
 
 <div class = "main">
 	<div class = "head">
-	    <button type="button" id = "load-content" class="btn btn-primary btn-lg active">Get Location and Load Content
-	    </button>
-	    <div class = "select-favorite">
-		    <button type="button" class="btn btn-primary btn-lg active" id="nearest-button">Nearby</button>
-			<button type="button" class="btn btn-default btn-lg inactive" id="favorite-button">Favorites</button>
-		</div>
 		<div class = "intro">
 			<h1 class = "welcome"> Welcome </h1>
 		    <div class = "time"></div>
 		    <div class = "weather"></div>
-		    <button class='btn btn-default remove-button' onclick = "resetRemoved()" id = "any" type='submit'>Reset Removed</button>
 		</div>
+	    <button type="button" id = "load-content" class="btn btn-primary btn-lg active">Get Location and Load Content
+	    </button>
+	    <div class = "select-favorite">
+		    <button type="button" class="btn btn-primary btn-lg active" id="nearest-button">Nearby Location</button>
+			<button type="button" class="btn btn-default btn-lg inactive" id="favorite-button">Favorite Location</button>
+		</div>
+		<div class = "remove-and-favorite">
+			<button class='btn btn-warning remove-button' onclick = "resetRemoved()" id = "remove-reset" type='submit'>Reset Removed</button>
+			<button class='btn btn-info remove-button' onclick = "saveFavorite()" id = "favorite-set" type='submit'>Save Location</button>
 	</div>
 
 	<div class = "sections">
