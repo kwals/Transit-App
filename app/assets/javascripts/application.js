@@ -44,6 +44,10 @@ var currentLocation = {
 
 };
 
+var favoriteLocation = {
+
+};
+
 var data = {
 
 };
@@ -95,6 +99,11 @@ var updateAll = function(){
 
 	if(onFav){
 		//use variable with favorite location and make calls to get functions
+		getBikeshare(favoriteLocation);
+		getUber(favoriteLocation);
+		getMetroRail(favoriteLocation);
+		getMetroBus(favoriteLocation);
+
 	}
 	else{
 		getBikeshare(currentLocation);
@@ -108,9 +117,11 @@ var updateAll = function(){
 		// $('.uber-table').append(templatens.uber(sample_data));
 		// $('.zipcar-table').append(templates.zipcar(sample_data));
 
-		clearTimeout(timouts.update);
-		timouts.update = setTimeout(function(){updateAll()}, 60000);
 	}
+
+
+	clearTimeout(timouts.update);
+	timouts.update = setTimeout(function(){updateAll()}, 60000);
 
 }
 
@@ -129,6 +140,20 @@ var getLocation = function(callback){
 
 	navigator.geolocation.getCurrentPosition(callbackFun);
 
+}
+
+var getFavoriteLocation = function(){
+		$.ajax({
+			url: "/favorites",
+			type:"GET",
+			success: function(result){
+				var favoriteResponse = result;
+				favoriteLocation.lat = favoriteResponse.favorites[0].lat * 1;
+				favoriteLocation.long = favoriteResponse.favorites[0].long * 1;
+			}
+		})
+
+		updateAll();
 }
 
 var resetRemoved = function(){
@@ -152,10 +177,10 @@ var selectDisplay = function(){
 		$('#favorite-button').addClass('inactive')
 		$('#favorite-button').addClass('btn-default');
 		onFav = false;
-		updateAll();
 	})
 
 	$('#favorite-button').on('click',function(){
+
 		$('#nearest-button').removeClass('active');
 		$('#nearest-button').removeClass('btn-primary');
 		$('#nearest-button').addClass('inactive')
@@ -165,7 +190,6 @@ var selectDisplay = function(){
 		$('#favorite-button').addClass('active')
 		$('#favorite-button').addClass('btn-primary');
 		onFav = true;
-		updateAll;
 	})
 
 }
@@ -214,7 +238,12 @@ var saveFavorite = function(){
 var loadButton = function(){
 
 	$('#load-content').click(function(){
-		getLocation();
+		if (onFav) {
+			getFavoriteLocation();
+		}
+		else{
+			getLocation();
+		}
 	})
 
 }
