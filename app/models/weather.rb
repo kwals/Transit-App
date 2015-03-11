@@ -7,7 +7,7 @@ class Weather
     weather = {}
     request = get("/weather?lat=#{params["lat"]}&lon=#{params["long"]}")
     weather["name"] = request["name"]
-    weather["temperature"] = (((request["main"]["temp"] - 273.15) * 1.8) + 32)
+    weather["temperature"] = (((request["main"]["temp"] - 273.15) * 1.8) + 32).to_i
     weather["description"] = request["weather"].try(:first)["main"]
     weather["image"] = "http://openweathermap.org/img/w/#{request["weather"].try(:first)["icon"]}.png"
     weather
