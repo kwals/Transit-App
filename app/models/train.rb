@@ -11,7 +11,7 @@ class Train
     request = get("/Rail.svc/json/jStationEntrances?Lat=#{params["lat"]}&Lon=#{params["long"]}&Radius=#{params["radius"]}&api_key=#{WMATA_KEY}")
     stations = []
     request["Entrances"].each do |station|
-      stations << station["StationCode1"] unless stations.include?(station)
+      stations << station["StationCode1"] unless stations.include?(station["StationCode1"])
     end
     stations.join(",")
   end
