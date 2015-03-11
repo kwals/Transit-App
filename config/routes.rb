@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/buses'        =>  'buses#index',          as: 'buses'
   get '/trains'       =>  'trains#index',         as: 'trains'
   get '/ubers'        =>  'ubers#index',          as: 'ubers'
+  get '/weather'      =>  'weather#index',        as: 'weathers'
   # get '/zipcars'      =>  'zipcars#index',        as: 'zipcars'
 
   resources :favorites, only: [:create, :index]
